@@ -1,5 +1,5 @@
 version: "3.9"
-    
+
 services:
   db:
     image: mysql:5.7
@@ -18,6 +18,7 @@ services:
     image: wordpress:latest
     volumes:
       - src:/var/www/html
+      - ./logs:/var/log/apache2  # Mount the logs directory
     ports:
       - "8000:80"
     restart: always
@@ -26,7 +27,9 @@ services:
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_SERVER_NAME: localhost  # Set ServerName
 
 volumes:
   database:
   src:
+
